@@ -7,7 +7,7 @@ from .global_message import MESSAGE
 class APITestView(APIView):
     def get(self,request):
         try:
-            students = Student.objects.all() #complex data 
+            students = Student.objects.filter(is_delete=False) #complex data 
             serializer = StudentSerializer(students, many=True) #it will convert the queryset into a list of dictionaries
 
             return Response({MESSAGE:serializer.data}) #it will return the data in json format
@@ -46,8 +46,12 @@ class APITestView(APIView):
     
     def delete(self,request,id):
         try:
-            instance=Student.objects.get(id=id)
-            instance.delete()
+            data=Student.objects.get(id=id)
+            data.is_delete=True
+            data.save()
             return Response({MESSAGE:'Data deleted successfully'}, status=status.HTTP_200_OK)
         except Exception as e:
              return Response({MESSAGE:str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+

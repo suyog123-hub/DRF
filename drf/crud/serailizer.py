@@ -1,26 +1,12 @@
-from rest_framework import serializers, viewsets
-from .models import Student
+from .models import Contact
+from rest_framework import serializers
 import re
-class StudentSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=100)
-    age = serializers.IntegerField()
-    phone = serializers.CharField(max_length=15)
-    email = serializers.EmailField()
-    is_delete = serializers.BooleanField(default=False)
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model=Contact
+        fields="__all__"
 
-    #it will convert the json data into a python dictionary and validate the data
-    def create(self, validated_data):
-        return Student.objects.create(**validated_data)
     
-    def update(self,instance,validated_data):
-        instance.name=validated_data.get('name',instance.name)
-        instance.age=validated_data.get('age',instance.age)
-        instance.phone=validated_data.get('phone',instance.phone)
-        instance.email=validated_data.get('email',instance.email)
-        instance.save()
-        return instance
-
-
     def validate_name(self,name):
         if len(name)<2:
             raise serializers.ValidationError('Name must be at least 2 characters long')
@@ -40,7 +26,7 @@ class StudentSerializer(serializers.Serializer):
         
         return phone
     
-    def validate_emial(self,email):
+    def validate_email(self,email):
         pattern = r'^[a-zA-Z0-9._%+-]+@gmail\.com$' #it will check if the email is valid and ends with @gmail.com
         if not re.match(pattern,email):
             raise serializers.ValidationError('Email must be a valid email address and end with @gmail.com')
