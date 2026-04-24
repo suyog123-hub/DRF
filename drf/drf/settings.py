@@ -41,9 +41,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'genericApp',
     'crud',
+    'corsheaders',
+    'accounts',
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -51,6 +54,13 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+#kundai domain name  use garna pauxa kasle paudaina secure garxa
+CORS_ALLOWED_ORIGINS = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000",
 ]
 
 ROOT_URLCONF = 'drf.urls'
@@ -72,6 +82,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'drf.wsgi.application'
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases

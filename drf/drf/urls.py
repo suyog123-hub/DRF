@@ -24,6 +24,7 @@ urlpatterns = [
     path('normal/',include('restframework.urls')),
     path('generic/',include('genericApp.urls')),
     path('crud/',include('crud.urls')),
+    path('accounts/',include('accounts.urls')),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
