@@ -6,15 +6,16 @@ from rest_framework.permissions import IsAuthenticated,AllowAny,IsAdminUser,IsAu
 from rest_framework.authentication import BasicAuthentication,TokenAuthentication,SessionAuthentication
 from django.contrib.auth.models import User
 from .serializer import Userserializer
+from .custompermission import ContactPermission
 # Create your views here.
 
 class Contacacountt(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
+    permission_classes = [ContactPermission]
     authentication_classes = [BasicAuthentication]
 
 
 class userRegisterview(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = Userserializer
-    permission_classes = [AllowAny]

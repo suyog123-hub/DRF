@@ -3,11 +3,10 @@ from django.contrib.auth.models import User
 
 class Userserializer(serializers.ModelSerializer):
     password1 = serializers.CharField(write_only=True)
-    class Meta:
+    class Meta: 
         model = User
         fields = ['first_name','last_name','email','username','password','password1']
        
-
     def validate(self,data):
         if data['password'] != data['password1']:
             raise serializers.ValidationError('Password and Confirm Password do not match')
