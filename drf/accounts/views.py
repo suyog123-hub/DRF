@@ -16,7 +16,8 @@ class Contacacountt(viewsets.ModelViewSet):
     queryset = Contact.objects.all()
     serializer_class = ContactSerializer
     permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]  
+    authentication_classes = [TokenAuthentication]
+    # authentication_classes = [JWTAuthentication]  # Use JWT authentication for this view
 
 
 class userRegisterview(viewsets.ModelViewSet):
@@ -26,6 +27,7 @@ class userRegisterview(viewsets.ModelViewSet):
     http_method_names = ['post']  # Only allow POST for registration
 
 
+#token authorization for login
 class loginview(viewsets.ModelViewSet):
     queryset=User.objects.all()
     permission_classes = [AllowAny]  # No authentication needed for login

@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'crud',
     'corsheaders',
     'accounts',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'pagination'
 ]
 
 MIDDLEWARE = [
@@ -137,3 +138,27 @@ USE_TZ = True
 STATIC_URL = 'static/'
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
+
+
+
+# paginaion ko lagi settings
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 3,
+
+    # this is the universal or the global throttling 
+    'DEFAULT_THROTTLE_CLASSES': [
+        # this is for the non login user
+        'rest_framework.throttling.AnonRateThrottle',
+        # this is for the login user or the authoruized user 
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        #time for the request that the user can make in a day 
+        'anon': '100/day',
+        'user': '1000/day',
+        'Nonloginuser': '4/min',
+        'loginuser': '10/min'
+    }
+}
