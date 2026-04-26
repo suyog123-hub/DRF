@@ -19,12 +19,22 @@ from django.urls import path,include
 from django.conf import settings
 from django.conf.urls.static import static
 
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('normal/',include('restframework.urls')),
     path('generic/',include('genericApp.urls')),
     path('crud/',include('crud.urls')),
     path('accounts/',include('accounts.urls')),
+    #to excess token for login 
+    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    #to refresh token for login
+    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-

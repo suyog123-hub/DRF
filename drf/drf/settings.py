@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'crud',
     'corsheaders',
     'accounts',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
