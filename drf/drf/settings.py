@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'accounts',
     'rest_framework.authtoken',
-    'pagination'
+    'pagination',
+  'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -158,7 +159,7 @@ REST_FRAMEWORK = {
         #time for the request that the user can make in a day 
         'anon': '100/day',
         'user': '1000/day',
-        'Nonloginuser': '4/min',
-        'loginuser': '10/min'
+        'Nonloginuser': '400/min',
+        'loginuser': '100/min'
     }
 }
