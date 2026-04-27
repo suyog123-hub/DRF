@@ -85,11 +85,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'drf.wsgi.application'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
-    ]
-}
+# REST_FRAMEWORK = {
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.IsAuthenticated',
+#     ]
+# }
 
 # Database
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
@@ -145,8 +145,8 @@ MEDIA_URL = '/media/'
 # paginaion ko lagi settings
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 3,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    # 'PAGE_SIZE': 3,
 
     # this is the universal or the global throttling 
     'DEFAULT_THROTTLE_CLASSES': [

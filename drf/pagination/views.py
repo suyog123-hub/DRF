@@ -6,8 +6,8 @@ from .custompagination import DetailsPagination
 from .customthrottling import CustomUserRateThrottle
 from rest_framework.filters import SearchFilter, OrderingFilter
 from django_filters.rest_framework import DjangoFilterBackend
-
-
+from django.views.decorators.cache import cache_page
+from django.utils.decorators import method_decorator
 class DetailsViewSet(viewsets.ModelViewSet):
     queryset = Details.objects.all()
     serializer_class = DetailsSerializer
@@ -18,6 +18,11 @@ class DetailsViewSet(viewsets.ModelViewSet):
     filterset_fields = ['name', 'age']
     search_fields = ['name']
     ordering_fields = ['name', 'age']
+
+    @method_decorator(cache_page(60 * 60 * 2))
+    def list(self,request, *args , **kwargs):
+        return super().list(request, *args, **kwargs)
+
 
 
 
